@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 # Serial port configuration
-PORT = 'COM9'
+PORT = 'COM12'
 BAUDRATE = 19200
 TIMEOUT = 1
 
