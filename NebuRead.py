@@ -21,7 +21,9 @@ BAUDRATE = 19200
 TIMEOUT = 1
 
 # CSV output file
-CSV_FILENAME = 'data_log.csv'
+CSV_FILENAME = 'nebuData_'
+timestamp = datetime.now().strftime("%d%b%y_%I_%M%p").lower()
+CSV_FILENAME += timestamp + ".csv"
 
 # Initialize data lists
 timestamps = []
