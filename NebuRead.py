@@ -6,6 +6,10 @@ Also saved to file data_log.csv.
 Change sampling rate with last argument to animation.FuncAnimation. 
  - Actual sample rate is about 200 ms slower than setpoint.
 
+ [7/8/25]: Ported code for Ohouse scale.  Max baud = 9600.
+ Fixed bug where negative sign was not captured.  Need to reflect this back 
+ to main branch for US Solid scale.
+
 """
 import serial
 import csv
@@ -16,8 +20,8 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 # Serial port configuration
-PORT = 'COM12'
-BAUDRATE = 19200
+PORT = 'COM9'
+BAUDRATE = 9600
 TIMEOUT = 1
 
 # CSV output file
@@ -33,15 +37,16 @@ start_time = time.time()
 
 def extract_number(text):
     """Extracts the first float or int from a string."""
-    match = re.search(r'[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?', text)
-    return float(match.group(0)) if match else None
+    pattern = r'([+-])\s*(\d*\.?\d+(?:[eE][+-]?\d+)?)'
+    match = re.sub(pattern, r'\1\2', text)
+    return float(match) if match else None
 
 def read_serial_line(ser):
     """Flushes input buffer and reads a line from serial."""
     try:
         ser.reset_input_buffer()  # FLUSH the buffer
         line = ser.readline().decode(errors='ignore').strip()
-        line = ser.readline().decode(errors='ignore').strip() #read 2x to clear potential garbage line'
+#        line = ser.readline().decode(errors='ignore').strip() #read 2x to clear potential garbage line'
         if line:
             value = extract_number(line)
             if value is not None:
