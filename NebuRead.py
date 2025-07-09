@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 # Serial port configuration
-PORT = 'COM9'
+PORT = 'COM3'
 BAUDRATE = 9600
 TIMEOUT = 1
 
@@ -84,6 +84,9 @@ except serial.SerialException as e:
 with open(CSV_FILENAME, mode='w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['Time (s)', 'Value'])
+
+print("==========================================")
+print(f"Current time: {datetime.now().strftime('%I:%M %p')}")
 
 # Set up real-time plot
 fig, ax = plt.subplots()
