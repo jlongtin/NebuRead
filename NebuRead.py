@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 # Serial port configuration
-PORT = 'COM12'
+PORT = 'COM3'
 BAUDRATE = 19200
 TIMEOUT = 1
 
@@ -39,8 +39,8 @@ def extract_number(text):
 def read_serial_line(ser):
     """Flushes input buffer and reads a line from serial."""
     try:
-        ser.reset_input_buffer()  # FLUSH the buffer
-        line = ser.readline().decode(errors='ignore').strip()
+      #  ser.reset_input_buffer()  # FLUSH the buffer
+       # line = ser.readline().decode(errors='ignore').strip()
         line = ser.readline().decode(errors='ignore').strip() #read 2x to clear potential garbage line'
         if line:
             value = extract_number(line)
@@ -82,7 +82,7 @@ with open(CSV_FILENAME, mode='w', newline='') as csvfile:
 
 # Set up real-time plot
 fig, ax = plt.subplots()
-ani = animation.FuncAnimation(fig, update_plot, interval=200)  #  interval timing
+ani = animation.FuncAnimation(fig, update_plot, interval=1000)  #  interval timing
 plt.tight_layout()
 
 try:
