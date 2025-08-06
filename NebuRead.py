@@ -90,7 +90,7 @@ print(f"Current time: {datetime.now().strftime('%I:%M %p')}")
 
 # Set up real-time plot
 fig, ax = plt.subplots()
-ani = animation.FuncAnimation(fig, update_plot, interval=200)  #  interval timing
+ani = animation.FuncAnimation(fig, update_plot, interval=200, save_count=1000)  #  interval timing
 plt.tight_layout()
 
 try:
